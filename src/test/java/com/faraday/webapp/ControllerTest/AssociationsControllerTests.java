@@ -383,6 +383,14 @@ public class AssociationsControllerTests {
     .andExpect(jsonPath("$.message").value("Associazione "+association.getNome()+" con id " + association.getId() + " cancellata con successo"))
     .andDo(print());
 
+    Associations association1 = associationRepository.findByFidalId("BAAAA");
+    mockMvc.perform(MockMvcRequestBuilders.delete("/associations/delete/"+association1.getId()) 
+    .accept(MediaType.APPLICATION_JSON))
+    .andExpect(status().isOk())
+    .andExpect(jsonPath("$.code").value("200 OK"))
+    .andExpect(jsonPath("$.message").value("Associazione "+association1.getNome()+" con id " + association1.getId() + " cancellata con successo"))
+    .andDo(print());
+
   }
 
   @Test

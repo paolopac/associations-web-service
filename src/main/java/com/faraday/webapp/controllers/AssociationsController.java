@@ -258,8 +258,17 @@ public class AssociationsController {
 
   }
 
+  @ApiOperation(
+    value= "Eliminazione associazione",
+    notes= "",
+    response = Associations.class,
+    produces = "application/json")
+  @ApiResponses(value = {
+    @ApiResponse(code = 200, message = "Associazione eliminata"),
+    @ApiResponse(code = 404, message = "Associazione non presente")
+  }) 
   @RequestMapping(value="/delete/{id}", method = RequestMethod.DELETE)
-  public ResponseEntity<?> delAssociations(@PathVariable("id") int id) throws NotFoundException {
+  public ResponseEntity<?> delAssociations(@ApiParam("Id associazione") @PathVariable("id") int id) throws NotFoundException {
 
     log.info(String.format("********** Delete associations %s", id));
 
