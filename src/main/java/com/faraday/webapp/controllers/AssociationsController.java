@@ -75,6 +75,7 @@ public class AssociationsController {
 
     log.info("********** Check duplicate by FIDAL id ");
 
+
     if(null != associationsService.selByFIDALId(association.getFidalId())) {
 
       String errMsg = String.format(messager.getMessage("Duplicate.Associations.byFIDALId", null, LocaleContextHolder.getLocale()), association.getFidalId());

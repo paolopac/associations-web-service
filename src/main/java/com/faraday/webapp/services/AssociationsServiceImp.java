@@ -25,8 +25,8 @@ public class AssociationsServiceImp  implements AssociationsService{
   @Transactional
   @Caching(evict = {
     @CacheEvict(value="allAssociationsCache", allEntries=true),
-    @CacheEvict(value="selByAssociationsIdCache", allEntries=true),
-    @CacheEvict(value="selByFIDALIdCache", allEntries=true)
+   // @CacheEvict(value="selByAssociationsIdCache", allEntries=true),
+   @CacheEvict(value="selByFIDALIdCache", allEntries=true)
   })
   public void insAssociations(Associations association){
 
@@ -43,12 +43,10 @@ public class AssociationsServiceImp  implements AssociationsService{
   }
 
   @Override
-  @Cacheable(value = "selByAssociationsIdCache", sync = true)
+  @Cacheable(value = "selByAssociationsIdCache", key="#id", sync = true)
   public Associations selByAssociationsId(int id) {
 
-    Associations association = associationRepository.findById(id).orElse(null);
-
-    return association;
+    return associationRepository.findById(id).orElse(null);
 
   }
 
@@ -77,7 +75,7 @@ public class AssociationsServiceImp  implements AssociationsService{
   @Transactional
   @Caching(evict = {
     @CacheEvict(value="allAssociationsCache", allEntries=true),
-    @CacheEvict(value="selByAssociationsIdCache", allEntries=true),
+    @CacheEvict(value="selByAssociationsIdCache", key="#association.id"),
     @CacheEvict(value="selByFIDALIdCache", allEntries=true)
   })
   public void delAssociations(Associations association) {

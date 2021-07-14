@@ -1,8 +1,10 @@
+/Users/paoloacqua/Documents/workspace/tarahumara/associations-web-service/src/main/java/com/faraday/webapp/repository/CustomAssociationRepository.java
 /Users/paoloacqua/Documents/workspace/tarahumara/associations-web-service/src/main/java/com/faraday/webapp/exception/DuplicateException.java
 /Users/paoloacqua/Documents/workspace/tarahumara/associations-web-service/src/main/java/com/faraday/webapp/exception/RestExceptionHandler.java
 /Users/paoloacqua/Documents/workspace/tarahumara/associations-web-service/src/main/java/com/faraday/webapp/MessageConfig.java
 /Users/paoloacqua/Documents/workspace/tarahumara/associations-web-service/src/main/java/com/faraday/webapp/services/AssociationsService.java
 /Users/paoloacqua/Documents/workspace/tarahumara/associations-web-service/src/main/java/com/faraday/webapp/controllers/AssociationsController.java
+/Users/paoloacqua/Documents/workspace/tarahumara/associations-web-service/src/main/java/com/faraday/webapp/repository/CustomAssociationRepositoryImpl.java
 /Users/paoloacqua/Documents/workspace/tarahumara/associations-web-service/src/main/java/com/faraday/webapp/Application.java
 /Users/paoloacqua/Documents/workspace/tarahumara/associations-web-service/src/main/java/com/faraday/webapp/SwaggerConfig.java
 /Users/paoloacqua/Documents/workspace/tarahumara/associations-web-service/src/main/java/com/faraday/webapp/services/AssociationsServiceImp.java
