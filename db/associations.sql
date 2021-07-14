@@ -1,7 +1,7 @@
 CREATE TABLE `associations` (
   `ID` int NOT NULL AUTO_INCREMENT,
   `NOME` varchar(40) NOT NULL,
-  `IDFIDAL` varchar(10) NOT NULL,
+  `FIDALID` varchar(10) NOT NULL,
   `CF` varchar(16),
   `PIVA` varchar(11),
   `CITTA` varchar(50) NOT NULL,

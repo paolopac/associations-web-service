@@ -3,7 +3,9 @@ package com.faraday.webapp.services;
 
 import java.util.List;
 
-import javax.persistence.Cacheable;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
+import org.springframework.cache.annotation.CacheEvict;
 
 import com.faraday.webapp.entities.Associations;
 import com.faraday.webapp.repository.AssociationRepository;
@@ -21,17 +23,73 @@ public class AssociationsServiceImp  implements AssociationsService{
 
   @Override
   @Transactional
-  public void InsAssociations(Associations association){
+  @Caching(evict = {
+    @CacheEvict(value="allAssociationsCache", allEntries=true),
+    @CacheEvict(value="selByAssociationsIdCache", allEntries=true),
+    @CacheEvict(value="selByFIDALIdCache", allEntries=true)
+  })
+  public void insAssociations(Associations association){
 
     associationRepository.save(association);
 
   }
   
   @Override
-  @Cacheable(value = "associationssache", sync = true)
-  public List<Associations> getAllAssociations(){
+  @Cacheable(value = "allAssociationsCache", sync = true)
+  public List<Associations> selAllAssociations(){
 
     return associationRepository.findAll();
     
+  }
+
+  @Override
+  @Cacheable(value = "selByAssociationsIdCache", sync = true)
+  public Associations selByAssociationsId(int id) {
+
+    Associations association = associationRepository.findById(id).orElse(null);
+
+    return association;
+
+  }
+
+  @Override
+  @Cacheable(value = "selByFIDALIdCache", sync = true)
+  public Associations selByFIDALId(String FIDALId) {
+
+    return associationRepository.findByFidalId(FIDALId);
+
+  }
+
+  @Override
+  @Transactional
+  @Caching(evict = {
+    @CacheEvict(value="allAssociationsCache", allEntries=true),
+    @CacheEvict(value="selByAssociationsIdCache", allEntries=true),
+    @CacheEvict(value="selByFIDALIdCache", allEntries=true)
+  })
+  public Associations updateAssociations(Associations association) {
+
+    return associationRepository.save(association);
+
+  }
+
+  @Override
+  @Transactional
+  @Caching(evict = {
+    @CacheEvict(value="allAssociationsCache", allEntries=true),
+    @CacheEvict(value="selByAssociationsIdCache", allEntries=true),
+    @CacheEvict(value="selByFIDALIdCache", allEntries=true)
+  })
+  public void delAssociations(Associations association) {
+
+    associationRepository.delete(association);
+
+  }
+
+  @Override
+  public void detachAssociations(Associations association) {
+
+    associationRepository.detach(association);
+
   }
 }

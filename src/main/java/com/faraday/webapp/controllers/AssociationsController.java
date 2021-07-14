@@ -9,7 +9,9 @@ import javax.validation.Valid;
 import com.faraday.webapp.entities.Associations;
 import com.faraday.webapp.exception.BindingException;
 import com.faraday.webapp.exception.NotFoundException;
+import com.faraday.webapp.exception.DuplicateException;
 import com.faraday.webapp.services.AssociationsService;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
@@ -22,7 +24,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpHeaders;
 
 import org.springframework.validation.BindingResult;
-
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -44,7 +46,7 @@ public class AssociationsController {
   private AssociationsService associationsService;
   
 	@Autowired
-	private ResourceBundleMessageSource errMessage;
+	private ResourceBundleMessageSource messager;
 
   @ApiOperation(
     value= "Inserisce una nuova associazione sportiva",
@@ -52,24 +54,38 @@ public class AssociationsController {
     response = Associations.class,
     produces = "application/json")
   @ApiResponses(value = {
-    @ApiResponse(code = 200, message = "Associations Inserito"),
+    @ApiResponse(code = 200, message = "Associazione Inserita"),
     @ApiResponse(code = 400, message = "Dati inseriti non validi"),
+    @ApiResponse(code = 406, message = "Associazione con FIDAL Id presente")
   })
   @RequestMapping(value = "/create", method = RequestMethod.POST, produces = "application/json")
-  public ResponseEntity<?> insAssociations(@ApiParam("Associations da inserire") @Valid @RequestBody Associations association, BindingResult bindingResult) throws BindingException {
+  public ResponseEntity<?> insAssociations(@ApiParam("Associations da inserire") @Valid @RequestBody Associations association, BindingResult bindingResult) 
+  throws BindingException, DuplicateException {
     
-    log.info(String.format("Save associations %s", association.getNome()));
+    log.info(String.format("********** Save associations %s", association.getNome()));
 
     if(bindingResult.hasErrors()) {
 
-      String errMsg = errMessage.getMessage(bindingResult.getFieldError(), LocaleContextHolder.getLocale());
+      String errMsg = messager.getMessage(bindingResult.getFieldError(), LocaleContextHolder.getLocale());
 
       log.warning(errMsg);
 
       throw new BindingException(errMsg);
     }
 
-    associationsService.InsAssociations(association);
+    log.info("********** Check duplicate by FIDAL id ");
+
+    if(null != associationsService.selByFIDALId(association.getFidalId())) {
+
+      String errMsg = String.format(messager.getMessage("Duplicate.Associations.byFIDALId", null, LocaleContextHolder.getLocale()), association.getFidalId());
+
+      log.warning(errMsg);
+
+      throw new DuplicateException(errMsg);
+
+    }
+
+    associationsService.insAssociations(association);
 
     HttpHeaders header = new HttpHeaders();
     ObjectMapper objectMapper = new ObjectMapper();
@@ -82,34 +98,190 @@ public class AssociationsController {
     return new ResponseEntity<>(responseNode, header, HttpStatus.CREATED);
   }
 
+  @ApiOperation(
+    value= "Reperimento lista associazioni",
+    notes= "Recupera tutte le associazioni",
+    response = Associations.class,
+    produces = "application/json")
+  @ApiResponses(value = {
+    @ApiResponse(code = 200, message = "Associazioni trovate"),
+    @ApiResponse(code = 404, message = "Associazioni non presenti"),
+  })
   @RequestMapping(value="/search/all", method = RequestMethod.GET, produces = "application/json")
-  public ResponseEntity<List<Associations>> getAllAssociations() throws NotFoundException {
+  public ResponseEntity<List<Associations>> selAllAssociations() throws NotFoundException {
 
-    log.info("Get all associations");
+    log.info("********** Get all associations");
 
-    List<Associations> associations = associationsService.getAllAssociations();
+    List<Associations> associations = associationsService.selAllAssociations();
 
     if(associations.isEmpty()){
 
-      String errMsg = String.format("Nessuna associazione è presente");
+      String errMsg = messager.getMessage("NotFound.Association.selAll", null, LocaleContextHolder.getLocale());
 
       log.warning(errMsg);
 
-      HttpHeaders header = new HttpHeaders();
-      ObjectMapper objectMapper = new ObjectMapper();
-      ObjectNode responseNode = objectMapper.createObjectNode();
+      throw new NotFoundException(errMsg);
+    }
+    
+    log.info("********** Associations found:" + associations.size());
 
-      header.setContentType(MediaType.APPLICATION_JSON);
-      responseNode.put
-      responseNode.put
+    return new ResponseEntity<List<Associations>>(associations, HttpStatus.OK);
+    
+  }
+  
+  @ApiOperation(
+    value= "Reperimento associazione attraverso Id",
+    notes= "Recupera l'associazione attraverso l'id associazine",
+    response = Associations.class,
+    produces = "application/json")
+  @ApiResponses(value = {
+    @ApiResponse(code = 200, message = "Associazione trovata"),
+    @ApiResponse(code = 404, message = "Associazione non presente"),
+  })
+  @RequestMapping(value="/search/code/{id}", method = RequestMethod.GET, produces = "application/json")
+  public ResponseEntity<Associations> selByAssociationsId(@ApiParam("Id associazione da ricercare") @PathVariable("id") int id) throws NotFoundException {
+    
+    log.info("********** Get associations with id: " + id);
+
+    Associations association = associationsService.selByAssociationsId(id);
+
+    if(null == association) {
+
+      String errMsg = String.format(messager.getMessage("NotFound.Association.selById", null, LocaleContextHolder.getLocale()), id);
 
       throw new NotFoundException(errMsg);
     }
 
-
-    
-    errMessage.getMessage("Size.Association.nome.Validation", null, LocaleContextHolder.getLocale());
+    return new ResponseEntity<Associations>(association, HttpStatus.OK);
 
   }
   
+  
+  @ApiOperation(
+    value= "Reperimento associazione attraverso FIDAL Id",
+    notes= "Recupera l'associazione attraverso il FIDAL Id",
+    response = Associations.class,
+    produces = "application/json")
+  @ApiResponses(value = {
+    @ApiResponse(code = 200, message = "Associazione trovata"),
+    @ApiResponse(code = 404, message = "Associazione non presente"),
+  }) 
+  @RequestMapping(value="/search/fidalid/{id}", method = RequestMethod.GET, produces = "application/json")
+  public ResponseEntity<Associations> selByFIDALId(@ApiParam("FIDAL Id") @PathVariable("id") String id) throws NotFoundException{
+
+    log.info("********** Get associations with FIDAL id: " + id);
+
+    Associations association = associationsService.selByFIDALId(id);
+
+    if(null == association) {
+
+      String errMsg = String.format(messager.getMessage("NotFound.Association.selByFIDALId", null, LocaleContextHolder.getLocale()), id);
+
+      throw new  NotFoundException(errMsg);
+
+    }
+
+    return new ResponseEntity<Associations>(association, HttpStatus.OK);
+
+  }
+
+  @ApiOperation(
+    value= "Modifica associazione",
+    notes= "",
+    response = Associations.class,
+    produces = "application/json")
+  @ApiResponses(value = {
+    @ApiResponse(code = 200, message = "Associazione modificata"),
+    @ApiResponse(code = 404, message = "Associazione non presente"),
+    @ApiResponse(code = 400, message = "Dati inseriti non validi"),
+    @ApiResponse(code = 406, message = "Associazione con FIDAL Id presente")
+  }) 
+  @RequestMapping(value="/update", method = RequestMethod.PUT, produces ="application/json")
+  public ResponseEntity<?> updateAssociations(@ApiParam("Associazione contenente proprietà aggiornate") @Valid @RequestBody Associations association, BindingResult bindingResult) throws BindingException, NotFoundException, DuplicateException {
+    
+    log.info(String.format("********** Modify associations %s", association.getNome()));
+
+    if(bindingResult.hasErrors()){
+
+      String errMsg = messager.getMessage(bindingResult.getFieldError(), LocaleContextHolder.getLocale());
+
+      log.warning(errMsg);
+
+      throw new BindingException(errMsg);
+
+    }
+
+    Associations associationOld = new Associations();
+
+    associationOld =  associationsService.selByAssociationsId(association.getId());
+
+    if(null == associationOld) {
+                                                        
+      String errMsg = String.format(messager.getMessage("NotFound.Association.selById",null, LocaleContextHolder.getLocale()), association.getId());
+
+      log.warning(errMsg);
+
+      throw new NotFoundException(errMsg);
+
+    }
+    
+    if(!association.getFidalId().equals(associationOld.getFidalId())) {
+
+      Associations associationFinded = associationsService.selByFIDALId(association.getFidalId());
+
+      if(null != associationFinded) {
+        
+        String errMsg = String.format(messager.getMessage("Duplicate.Associations.byFIDALId", null, LocaleContextHolder.getLocale()), association.getFidalId());
+
+        log.warning(errMsg);
+
+        throw new DuplicateException(errMsg);
+
+      }
+
+    }
+
+    associationsService.detachAssociations(associationOld);
+    associationsService.updateAssociations(association);
+
+    HttpHeaders header = new HttpHeaders();
+    ObjectMapper objectMapper = new ObjectMapper();
+    ObjectNode responseNode = objectMapper.createObjectNode();
+
+    header.setContentType(MediaType.APPLICATION_JSON);
+    responseNode.put("code", HttpStatus.OK.toString());
+
+    responseNode.put("message", String.format(messager.getMessage("Ok.Associations.update", null, LocaleContextHolder.getLocale()), associationOld.getNome()));
+
+    return new ResponseEntity<>(responseNode, header, HttpStatus.CREATED);
+
+  }
+
+  @RequestMapping(value="/delete/{id}", method = RequestMethod.DELETE)
+  public ResponseEntity<?> delAssociations(@PathVariable("id") int id) throws NotFoundException {
+
+    log.info(String.format("********** Delete associations %s", id));
+
+    Associations association = associationsService.selByAssociationsId(id);
+
+    if(null == association) {
+
+      String errMsg = String.format(messager.getMessage("NotFound.Association.selById", null, LocaleContextHolder.getLocale()), id);
+
+      throw new NotFoundException(errMsg);
+    }
+
+    associationsService.delAssociations(association);
+ 
+    HttpHeaders header = new HttpHeaders();
+    ObjectMapper objectMapper = new ObjectMapper();
+    ObjectNode responseNode = objectMapper.createObjectNode();
+
+    header.setContentType(MediaType.APPLICATION_JSON);
+    responseNode.put("code", HttpStatus.OK.toString());
+    responseNode.put("message", String.format(messager.getMessage("Ok.Associations.delete", null, LocaleContextHolder.getLocale()), association.getNome(),id));
+    return new ResponseEntity<>(responseNode, header, HttpStatus.OK);
+    
+  }
+
 }
