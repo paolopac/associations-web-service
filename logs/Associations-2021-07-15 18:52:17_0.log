@@ -1,0 +1,5 @@
+2021-07-15 18:52:17.254  INFO 65966 --- [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2021-07-15 18:52:17.255  INFO 65966 --- [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2021-07-15 18:52:17.257  INFO 65966 --- [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 2 ms
+2021-07-15 18:52:17.492  INFO 65966 --- [main] c.f.w.c.AssociationsController           : ********** Save associations ASD RUNNERS
+2021-07-15 18:52:17.493  INFO 65966 --- [main] c.f.w.c.AssociationsController           : ********** Check duplicate by FIDAL id 

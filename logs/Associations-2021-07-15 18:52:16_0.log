@@ -1,0 +1,6 @@
+2021-07-15 18:52:16.477  INFO 65966 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2021-07-15 18:52:16.516  INFO 65966 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2021-07-15 18:52:16.565  INFO 65966 --- [main] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2021-07-15 18:52:16.855  INFO 65966 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_1
+2021-07-15 18:52:16.861  INFO 65966 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_2
+2021-07-15 18:52:16.910  INFO 65966 --- [main] c.f.w.C.AssociationsControllerTests      : Started AssociationsControllerTests in 11.428 seconds (JVM running for 13.321)

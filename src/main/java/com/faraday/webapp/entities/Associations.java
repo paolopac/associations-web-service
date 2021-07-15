@@ -77,7 +77,7 @@ public class Associations implements Serializable {
 
   @Column(name="EMAIL")
   @NotNull(message = "{NotNull.Association.eMail.Validation}")
-  @Size(max=30, message = "{Size.Association.eMail.Validation}")
+  @Size(max=50, message = "{Size.Association.eMail.Validation}")
   @NotEmpty(message = "{NotEmpty.Association.eMail.Validation}")
   private String eMail;
 }

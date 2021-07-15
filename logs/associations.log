@@ -1,3 +1,9 @@
-2021-07-14 20:04:22.403  INFO 84292 --- [http-nio-5093-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2021-07-14 20:04:22.427  INFO 84292 --- [http-nio-5093-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2021-07-14 20:04:22.430  INFO 84292 --- [http-nio-5093-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
+2021-07-15 18:52:19.007  INFO 65966 --- [main] c.f.w.c.AssociationsController           : ********** Delete associations 129
+2021-07-15 18:52:19.081  INFO 65966 --- [main] c.f.w.c.AssociationsController           : ********** Delete associations 130
+2021-07-15 18:52:19.157  INFO 65966 --- [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2021-07-15 18:52:19.157  INFO 65966 --- [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2021-07-15 18:52:19.160  INFO 65966 --- [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 3 ms
+2021-07-15 18:52:19.162  INFO 65966 --- [main] c.f.w.c.AssociationsController           : ********** Delete associations 99999999
+2021-07-15 18:52:19.220  INFO 65966 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2021-07-15 18:52:19.226  INFO 65966 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2021-07-15 18:52:19.243  INFO 65966 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

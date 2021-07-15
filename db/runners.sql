@@ -1,0 +1,9 @@
+CREATE TABLE `runners` (
+  `ID` int NOT NULL AUTO_INCREMENT,
+  `NOME` varchar(40) NOT NULL,
+  `COGNOME` varchar(40) NOT NULL,
+  `EMAIL` varchar(50) NOT NULL,
+  `GENERE` varchar(1),
+  `ASSOCIATIONID` int NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3
