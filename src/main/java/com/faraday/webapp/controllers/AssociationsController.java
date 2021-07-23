@@ -102,6 +102,7 @@ public class AssociationsController {
   @ApiOperation(
     value= "Reperimento lista associazioni",
     notes= "Recupera tutte le associazioni",
+    responseContainer = "List",
     response = Associations.class,
     produces = "application/json")
   @ApiResponses(value = {

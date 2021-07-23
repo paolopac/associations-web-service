@@ -18,6 +18,7 @@ import lombok.Data;
 @Table(name="associations")
 @Data
 public class Associations implements Serializable {
+  
   private static final long serialVersionUID = 1000000000000000000L;
 
   @Id
