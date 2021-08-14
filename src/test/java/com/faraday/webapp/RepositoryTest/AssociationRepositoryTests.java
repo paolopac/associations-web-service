@@ -96,7 +96,7 @@ public class AssociationRepositoryTests {
   @Order(5)
   public void testUpdateAssociations() {
 
-    Associations association = associationRepository.findByFidalId("BA___");
+    Associations association = associationRepository.findByFidalId("BA000");
 
     association.setNome("ASD RUNNER 2");
     association.setCAP("70033");
@@ -128,9 +128,9 @@ public class AssociationRepositoryTests {
   @Order(6)
   public void testDelAssociations() {
 
-    Associations association = associationRepository.findByFidalId("BA000");
+    Associations association = associationRepository.findByFidalId("BA___");
     associationRepository.delete(association);
-    assertNull(associationRepository.findByFidalId("BA000"));
+    assertNull(associationRepository.findByFidalId("BA___"));
     
   }
 }
