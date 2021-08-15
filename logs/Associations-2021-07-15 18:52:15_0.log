@@ -1,1 +1,0 @@
-2021-07-15 18:52:15.310  INFO 65966 --- [main] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]

@@ -1,4 +1,0 @@
-2021-07-14 19:36:38.002  INFO 76316 --- [Thread-133] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
-2021-07-14 19:36:38.014  INFO 76316 --- [Thread-133] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2021-07-14 19:36:38.017  INFO 76316 --- [Thread-133] com.zaxxer.hikari.HikariDataSource       : HikariPool-27 - Shutdown initiated...
-2021-07-14 19:36:38.019  INFO 76316 --- [Thread-133] com.zaxxer.hikari.HikariDataSource       : HikariPool-27 - Shutdown completed.

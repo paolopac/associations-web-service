@@ -1,2 +1,0 @@
-2021-07-14 19:34:12.817  INFO 76316 --- [http-nio-5093-exec-7] c.f.w.c.AssociationsController           : ********** Get all associations
-2021-07-14 19:34:12.916  INFO 76316 --- [http-nio-5093-exec-7] c.f.w.c.AssociationsController           : ********** Associations found:3
