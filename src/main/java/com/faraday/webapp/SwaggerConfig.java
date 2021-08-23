@@ -22,7 +22,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @SwaggerDefinition(
 		 info = @Info(
 				 title = "associations-web-service", 
-				 version = "0.0.1-SNAPSHOT",
+				 version = "0.0.2-SNAPSHOT",
 				 description = "Gestisce associazioni podistiche FIDALs",
 				 contact = @Contact(
 						name = "Paolo Acquaviva",

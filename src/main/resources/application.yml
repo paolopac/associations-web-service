@@ -1,0 +1,69 @@
+# ==============================================================
+# = Associations Web Service
+# ==============================================================
+
+server:
+  port: 5093
+
+spring:
+  application:
+    name: associations-web-service
+
+# ==============================================================
+# = DBMS MySQL Parameters
+# ==============================================================
+  datasource:
+    initialization-mode: always
+    username: associationsWS
+    password: 20210821as!
+    url: jdbc:mysql://localhost:3306/tarahumara?useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    hikari:
+      connection-timeout: 40000
+      max-lifetime: 40000
+      validation-timeout: 10000
+      maximum-pool-size: 10 
+  jpa:
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLInnoDBDialect
+        jdbc:
+          lob:
+            non_contextual_creation: true
+    show-sql: true
+    # spring.jackson.time-zone=UTC
+
+# ==============================================================
+# = Proprietà Livello Log
+# = Default ERROR, WARN e INFO 
+# = Levels: TRACE, DEBUG, INFO, WARN, ERROR, FATAL, OFF
+# ==============================================================   
+logging:
+  file:
+    name: 'logs/associations-web-service.log'
+    max-size: 10MB
+  # Livello del Log generale
+  level:
+    root: INFO 
+    # Livello di log specifico
+    # org.springframework.security: DEBUG
+    org.hibernate: INFO
+
+## ACTUATOR
+management:
+  endpoints:
+    web:
+      exposure: 
+        include: health, info, shutdown
+# ACTUATOR - SHUTDOWN
+    shutdown:
+      enabled: true
+
+# ACTUATOR - INFO
+info:
+  author:
+    name: Paolo
+    surname: Acquaviva
+    contact: paoloacqua@hotmail.it
+  env: dev

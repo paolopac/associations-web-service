@@ -295,4 +295,32 @@ public class AssociationsController {
     
   }
 
+
+  @ApiOperation(
+    value= "Verifica esistenza associazione tramite Id",
+    notes= "",
+    response = HttpStatus.class,
+    produces = "application/json")
+  @ApiResponses(value = {
+    @ApiResponse(code = 200, message = "Associazione trovata"),
+    @ApiResponse(code = 404, message = "Associazione non presente"),
+  })
+  @RequestMapping(value="/verify/code/{id}", method = RequestMethod.GET, produces = "application/json")
+  public ResponseEntity<Void> verifyAssociationsById(@ApiParam("Id associazione di cui è necessario verificarne l'esistenza") @PathVariable("id") int id) throws NotFoundException {
+    
+    log.info(String.format(messager.getMessage("Ok.Associations.Pre.selAssociationsById", null, LocaleContextHolder.getLocale()), id));
+
+    Associations association = associationsService.selByAssociationsId(id);
+
+    if(null == association) {
+
+      String errMsg = String.format(messager.getMessage("NotFound.Association.verifyAssociationsById", null, LocaleContextHolder.getLocale()), id);
+
+      throw new NotFoundException(errMsg);
+    }
+
+    return new ResponseEntity<>(HttpStatus.OK);
+
+  }
+  
 }
