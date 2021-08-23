@@ -10,6 +10,7 @@ import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
@@ -50,6 +51,7 @@ public class AssociationsControllerTests {
 	}
 
   @Test
+  @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
   public void testCreateAssociation() throws Exception {
 
     String JsonData = "{\r\n" + 
@@ -79,6 +81,7 @@ public class AssociationsControllerTests {
   }
 
   @Test
+  @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
   public void testGetAllAssociations() throws Exception {
 
     Associations association = new Associations();
@@ -105,6 +108,7 @@ public class AssociationsControllerTests {
   }
 
   @Test
+  @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
   public void testSelByCodAssociations() throws Exception {
 
     Associations association = new Associations();
@@ -159,6 +163,7 @@ public class AssociationsControllerTests {
   }
 
   @Test
+  @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
   public void testSelByFIDALId() throws Exception {
 
     Associations association = new Associations();
@@ -186,6 +191,7 @@ public class AssociationsControllerTests {
   }
 
   @Test
+  @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
   public void  testUpdateAssociations() throws Exception {
 
     Associations association = new Associations();
@@ -231,6 +237,7 @@ public class AssociationsControllerTests {
   }
 
   @Test
+  @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
   public void testDeleteAssociations() throws Exception {
 
     Associations association = new Associations();
@@ -253,13 +260,12 @@ public class AssociationsControllerTests {
     .andExpect(status().isOk())
     .andExpect(jsonPath("$.code").value("200 OK"))
     .andExpect(jsonPath("$.message").value("Associazione "+associationFinded.getNome()+" con id " + associationFinded.getId() + " cancellata con successo"))
-    .andDo(print());
-
-    associationRepository.delete(associationRepository.findByFidalId("BA000"));
+    .andDo(print());    
 
   }
 
   @Test
+  @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
   public void verifyAssociationById() throws Exception {
 
     Associations association = new Associations();
