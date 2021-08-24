@@ -110,7 +110,7 @@ public class ExceptionsControllerTests {
     .accept(MediaType.APPLICATION_JSON))
     .andExpect(status().isBadRequest())
     .andExpect(jsonPath("$.code").value(400))
-    .andExpect(jsonPath("$.message").value("Il nome NON deve essere NULL"))
+    .andExpect(jsonPath("$.message").value("Il campo nome non deve essere vuoto"))
     .andDo(print());
 
   }
