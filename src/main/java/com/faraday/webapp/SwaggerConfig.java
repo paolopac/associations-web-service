@@ -21,7 +21,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 @SwaggerDefinition(
 		 info = @Info(
-				 title = "associations-web-service", 
+				 title = "ASSOCIATIONS-WEB-SERVICE", 
 				 version = "0.0.2-SNAPSHOT",
 				 description = "Gestisce associazioni podistiche FIDALs",
 				 contact = @Contact(

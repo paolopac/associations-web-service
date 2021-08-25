@@ -4,11 +4,11 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.faraday.webapp</groupId>
-  <artifactId>associations-web-service</artifactId>
+  <artifactId>ASSOCIATIONS-WEB-SERVICE</artifactId>
   <version>0.0.2-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>associations-web-service</name>
+  <name>ASSOCIATIONS-WEB-SERVICE</name>
   <description>Microservice gestione associations</description>
 
   <parent>
@@ -116,17 +116,6 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
       </plugin>
-      <plugin>
-        <!-- FIX ERROR IN MVN CLEAN INSTALL -->
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <version>2.5</version>
-        <configuration>
-            <skipTests>false</skipTests>
-            <testFailureIgnore>true</testFailureIgnore>
-            <forkMode>once</forkMode>
-        </configuration>
-      </plugin> 
     </plugins>
   </build>
 </project>

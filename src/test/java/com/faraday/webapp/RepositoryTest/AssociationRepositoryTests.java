@@ -7,6 +7,7 @@ import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -21,6 +22,7 @@ import com.faraday.webapp.repository.AssociationRepository;
 
 @ContextConfiguration(classes = Application.class)
 @SpringBootTest
+@ActiveProfiles({"test"})
 @TestMethodOrder(OrderAnnotation.class)
 public class AssociationRepositoryTests {
 

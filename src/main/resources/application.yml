@@ -1,11 +1,21 @@
 # ==============================================================
 # = Associations Web Service
 # ==============================================================
-server:
-  port: 5093
+# ==============================================================
+# = NOTE
+# ==============================================================   
+# build:
+# mvn -Dmaven.test.skip=true clean install
+
+# run java JAR with specific profile ID:
+# java -jar -Dspring.profiles.active=zona[n] -Xmx96m -Xss512k NameApp.jar
+# ==============================================================
+# = PROFILE: zona1
+# ==============================================================
 spring:
+  profiles: zona1
   application:
-    name: associations-web-service
+    name: ASSOCIATIONS-WEB-SERVICE
 
 # ==============================================================
 # = DBMS MySQL Parameters
@@ -32,6 +42,9 @@ spring:
     show-sql: true
     # spring.jackson.time-zone=UTC
 
+server:
+  port: 5093
+
 # ==============================================================
 # = Proprietà Livello Log
 # = Default ERROR, WARN e INFO 
@@ -48,7 +61,9 @@ logging:
     # org.springframework.security: DEBUG
     org.hibernate: INFO
 
-## ACTUATOR
+# ==============================================================
+# = ACTUATOR
+# ==============================================================
 management:
   endpoints:
     web:
@@ -64,10 +79,10 @@ info:
     name: Paolo
     surname: Acquaviva
     contact: paoloacqua@hotmail.it
-  env: dev
+  env: dev-zone1
 
 # ==============================================================
-# = Eureka Properties  
+# = EUREKA  
 # ==============================================================
 eureka:
   instance:
@@ -84,3 +99,184 @@ eureka:
     fetch-registry: true
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/,http://localhost:8762/eureka/
+
+---
+
+# ==============================================================
+# = PROFILE: zona2
+# ==============================================================
+spring:
+  profiles: zona2
+  application:
+    name: ASSOCIATIONS-WEB-SERVICE
+
+# ==============================================================
+# = DBMS MySQL Parameters
+# ==============================================================
+  datasource:
+    initialization-mode: always
+    username: associationsWS
+    password: 20210821as!
+    url: jdbc:mysql://localhost:3306/tarahumara?useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    hikari:
+      connection-timeout: 40000
+      max-lifetime: 40000
+      validation-timeout: 10000
+      maximum-pool-size: 10 
+  jpa:
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLInnoDBDialect
+        jdbc:
+          lob:
+            non_contextual_creation: true
+    show-sql: true
+    # spring.jackson.time-zone=UTC
+
+server:
+  port: 5094
+# ==============================================================
+# = Proprietà Livello Log
+# = Default ERROR, WARN e INFO 
+# = Levels: TRACE, DEBUG, INFO, WARN, ERROR, FATAL, OFF
+# ==============================================================   
+logging:
+  file:
+    name: 'logs/associations-web-service.log'
+    max-size: 10MB
+  # Livello del Log generale
+  level:
+    root: INFO 
+    # Livello di log specifico
+    # org.springframework.security: DEBUG
+    org.hibernate: INFO
+
+# ==============================================================
+# = ACTUATOR
+# ==============================================================
+management:
+  endpoints:
+    web:
+      exposure: 
+        include: health, info, shutdown
+# ACTUATOR - SHUTDOWN
+    shutdown:
+      enabled: true
+
+# ACTUATOR - INFO
+info:
+  author:
+    name: Paolo
+    surname: Acquaviva
+    contact: paoloacqua@hotmail.it
+  env: dev-zona2
+  
+# ==============================================================
+# = EUREKA  
+# ==============================================================
+eureka:
+  instance:
+    #intervallo di attesa prima della rimozione del servizio (def 90 sec)
+    lease-expiration-duration-in-seconds: 60 
+    #intervallo di invio dell'heartbeat (def 30 sec)
+    leaseRenewalIntervalInSeconds: 15
+    #id di identificazione dell'istanza
+    instanceId: ${spring.application.name}-2
+    #registrazione per indirizzo ip (defualt hostname)
+    preferIpAddress: true
+  client:
+    registerWithEureka: true
+    fetch-registry: true
+    serviceUrl:
+      defaultZone: http://localhost:8762/eureka/,http://localhost:8761/eureka/
+
+---
+
+# ==============================================================
+# = PROFILE: test
+# ==============================================================
+spring:
+  profiles: test
+  application:
+    name: ASSOCIATIONS-WEB-SERVICE
+  cloud:
+    discovery:
+      enabled: false
+# ==============================================================
+# = DBMS MySQL Parameters
+# ==============================================================
+  datasource:
+    initialization-mode: always
+    username: associationsWS
+    password: 20210821as!
+    url: jdbc:mysql://localhost:3306/tarahumara?useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    hikari:
+      connection-timeout: 40000
+      max-lifetime: 40000
+      validation-timeout: 10000
+      maximum-pool-size: 10 
+  jpa:
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLInnoDBDialect
+        jdbc:
+          lob:
+            non_contextual_creation: true
+    show-sql: true
+    # spring.jackson.time-zone=UTC
+
+server:
+  port: 5093
+# ==============================================================
+# = Proprietà Livello Log
+# = Default ERROR, WARN e INFO 
+# = Levels: TRACE, DEBUG, INFO, WARN, ERROR, FATAL, OFF
+# ==============================================================   
+logging:
+  file:
+    name: 'logs/associations-web-service.log'
+    max-size: 10MB
+  # Livello del Log generale
+  level:
+    root: INFO 
+    # Livello di log specifico
+    # org.springframework.security: DEBUG
+    org.hibernate: INFO
+
+# ==============================================================
+# = ACTUATOR
+# ==============================================================
+management:
+  endpoints:
+    web:
+      exposure: 
+        include: health, info, shutdown
+# ACTUATOR - SHUTDOWN
+    shutdown:
+      enabled: true
+
+# ACTUATOR - INFO
+info:
+  author:
+    name: Paolo
+    surname: Acquaviva
+    contact: paoloacqua@hotmail.it
+  env: dev-zona1
+  
+# ==============================================================
+# = EUREKA  
+# ==============================================================
+eureka:
+  instance:
+    #intervallo di attesa prima della rimozione del servizio (def 90 sec)
+    lease-expiration-duration-in-seconds: 60 
+    #intervallo di invio dell'heartbeat (def 30 sec)
+    leaseRenewalIntervalInSeconds: 15
+    #id di identificazione dell'istanza
+    instanceId: ${spring.application.name}-1
+    #registrazione per indirizzo ip (defualt hostname)
+    preferIpAddress: true
