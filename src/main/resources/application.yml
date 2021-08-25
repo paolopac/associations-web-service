@@ -1,10 +1,8 @@
 # ==============================================================
 # = Associations Web Service
 # ==============================================================
-
 server:
   port: 5093
-
 spring:
   application:
     name: associations-web-service
@@ -67,3 +65,22 @@ info:
     surname: Acquaviva
     contact: paoloacqua@hotmail.it
   env: dev
+
+# ==============================================================
+# = Eureka Properties  
+# ==============================================================
+eureka:
+  instance:
+    #intervallo di attesa prima della rimozione del servizio (def 90 sec)
+    lease-expiration-duration-in-seconds: 60 
+    #intervallo di invio dell'heartbeat (def 30 sec)
+    leaseRenewalIntervalInSeconds: 15
+    #id di identificazione dell'istanza
+    instanceId: ${spring.application.name}-1
+    #registrazione per indirizzo ip (defualt hostname)
+    preferIpAddress: true
+  client:
+    registerWithEureka: true
+    fetch-registry: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/,http://localhost:8762/eureka/
