@@ -1,0 +1,14 @@
+0.2.0-SNAPSHOT
+
+Inseriti:
+Cloud Sleauth:
+per logging trace applicato all'interazione tra microservizi. Ognuna di essa
+è identificata in modo esso univoco, all'interno dei differenti microservizi
+coinvolti.
+
+Cloud Ziptkin: 
+applicativo web, esso permette, attraverso interfaccia grafica, la visualizzazione
+delle chiamate con tempi corrispondenti.
+Ogni chiamata è dettagliata con successive eventuali chiamate effettuate 
+ad altri microservizi.
+Permette la visualizzazione della gerarchia delel chiamate.
