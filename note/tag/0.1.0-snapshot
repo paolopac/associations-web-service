@@ -1,0 +1,9 @@
+0.1.0-SNAPSHOT
+
+L’App è cloud presenta quindi, più profili. Ognuno di essi si registra ad Eureka server e, chiamate eventuali Feign vengono effettuate a Zuul.
+
+Tutti i test hanno esito positivo.
+
+Produce correttamente il JAR ma, si effettua un force per ignorare gli errori in test causati essi da Eureka.
+
+Le chiamate postman, funzionano in modo corretto. Vedi note/test/associations-test
