@@ -1,5 +1,5 @@
 # ==============================================================
-# = Associations Web Service
+# = ASSOCIATIONS WEB SERVICE
 # ==============================================================
 # ==============================================================
 # = NOTE
@@ -79,7 +79,8 @@ info:
     name: Paolo
     surname: Acquaviva
     contact: paoloacqua@hotmail.it
-  env: dev-zone1
+  env: dev
+  profile: zone1 
 
 # ==============================================================
 # = EUREKA  
@@ -89,7 +90,7 @@ eureka:
     #intervallo di attesa prima della rimozione del servizio (def 90 sec)
     lease-expiration-duration-in-seconds: 60 
     #intervallo di invio dell'heartbeat (def 30 sec)
-    leaseRenewalIntervalInSeconds: 15
+    leaseRenewalIntervalInSeconds: 10
     #id di identificazione dell'istanza
     instanceId: ${spring.application.name}-1
     #registrazione per indirizzo ip (defualt hostname)
@@ -171,7 +172,8 @@ info:
     name: Paolo
     surname: Acquaviva
     contact: paoloacqua@hotmail.it
-  env: dev-zona2
+  env: dev
+  profile: zona2
   
 # ==============================================================
 # = EUREKA  
@@ -181,7 +183,7 @@ eureka:
     #intervallo di attesa prima della rimozione del servizio (def 90 sec)
     lease-expiration-duration-in-seconds: 60 
     #intervallo di invio dell'heartbeat (def 30 sec)
-    leaseRenewalIntervalInSeconds: 15
+    leaseRenewalIntervalInSeconds: 10
     #id di identificazione dell'istanza
     instanceId: ${spring.application.name}-2
     #registrazione per indirizzo ip (defualt hostname)
@@ -275,7 +277,7 @@ eureka:
     #intervallo di attesa prima della rimozione del servizio (def 90 sec)
     lease-expiration-duration-in-seconds: 60 
     #intervallo di invio dell'heartbeat (def 30 sec)
-    leaseRenewalIntervalInSeconds: 15
+    leaseRenewalIntervalInSeconds: 10
     #id di identificazione dell'istanza
     instanceId: ${spring.application.name}-1
     #registrazione per indirizzo ip (defualt hostname)

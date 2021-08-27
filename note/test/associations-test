@@ -1,0 +1,50 @@
+
+VERISON: 0.1.0-SNAPSHOT
+/create
+code = 200, message = "Associazione Inserita"
+OK
+code = 400, message = "Dati inseriti non validi"
+OK
+code = 406, message = "Associazione con FIDAL Id presente"
+OK
+
+/search/all
+code = 200, message = "Associazioni trovate"
+OK
+code = 404, message = "Associazioni non presenti"
+OK
+
+/search/code/{id}
+code = 200, message = "Associazione trovata"
+OK
+code = 404, message = "Associazione non presente"
+OK
+
+
+/search/fidalid/{id}
+code = 200, message = "Associazione trovata"
+OK
+code = 404, message = "Associazione non presente"
+OK
+
+/update
+code = 200, message = "Associazione modificata"
+OK
+code = 404, message = "Associazione non presente"
+OK
+code = 400, message = "Dati inseriti non validi"
+OK
+code = 406, message = "Associazione con FIDAL Id presente"
+OK
+
+/delete/{id}
+code = 200, message = "Associazione eliminata"
+OK
+code = 404, message = "Associazione non presente"
+OK
+
+/verify/code/{id}
+code = 200, message = "Associazione trovata"
+OK
+code = 404, message = "Associazione non presente"
+OK
