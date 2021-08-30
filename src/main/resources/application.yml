@@ -8,18 +8,16 @@
 # mvn -Dmaven.test.skip=true clean install
 
 # run java JAR with specific profile ID:
-# java -jar -Dspring.profiles.active=zona[n] -Xmx96m -Xss512k NameApp.jar
+# java -jar -Dspring.profiles.active=zone[n] -Dremotesrv=127.0.0.1 -DMySqlIp=127.0.0.1 -Xmx96m -Xss512k NameApp.jar
 # ==============================================================
-# = PROFILE: zona1
+# = PROFILE: zone1
 # ==============================================================
-remotesrv: 127.0.0.1
-
 spring:
-  profiles: zona1
+  profiles: zone1
   application:
     name: ASSOCIATIONS-WEB-SERVICE
   zipkin:
-    baseUrl: http://${remotesrv}:9411/
+    baseUrl: http://${ZipkinSrv}:9411/
     sender:
       type: web
   sleuth:
@@ -33,7 +31,7 @@ spring:
     initialization-mode: always
     username: associationsWS
     password: 20210821as!
-    url: jdbc:mysql://localhost:3306/tarahumara?useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    url: jdbc:mysql://${MySqlIp}:3306/tarahumara?useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
     hikari:
       connection-timeout: 40000
       max-lifetime: 40000
@@ -61,7 +59,7 @@ server:
 # ==============================================================   
 logging:
   file:
-    name: 'logs/associations-web-service.log'
+    name: 'logs/associations-web-service-zone1.log'
     max-size: 10MB
   # Livello del Log generale
   level:
@@ -108,19 +106,19 @@ eureka:
     registerWithEureka: true
     fetch-registry: true
     serviceUrl:
-      defaultZone: http://localhost:8761/eureka/,http://localhost:8762/eureka/
+      defaultZone: http://${eurekasrv1}:8761/eureka/,http://${eurekasrv2}:8762/eureka/
 
 ---
 
 # ==============================================================
-# = PROFILE: zona2
+# = PROFILE: zone2
 # ==============================================================
 spring:
-  profiles: zona2
+  profiles: zone2
   application:
     name: ASSOCIATIONS-WEB-SERVICE
   zipkin:
-    baseUrl: http://${remotesrv}:9411/
+    baseUrl: http://${ZipkinSrv}:9411/
     sender:
       type: web
   sleuth:
@@ -134,7 +132,7 @@ spring:
     initialization-mode: always
     username: associationsWS
     password: 20210821as!
-    url: jdbc:mysql://localhost:3306/tarahumara?useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    url: jdbc:mysql://${MySqlIp}:3306/tarahumara?useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
     hikari:
       connection-timeout: 40000
       max-lifetime: 40000
@@ -161,7 +159,7 @@ server:
 # ==============================================================   
 logging:
   file:
-    name: 'logs/associations-web-service.log'
+    name: 'logs/associations-web-service-zone2.log'
     max-size: 10MB
   # Livello del Log generale
   level:
@@ -189,7 +187,7 @@ info:
     surname: Acquaviva
     contact: paoloacqua@hotmail.it
   env: dev
-  profile: zona2
+  profile: zone2
   
 # ==============================================================
 # = EUREKA  
@@ -208,7 +206,7 @@ eureka:
     registerWithEureka: true
     fetch-registry: true
     serviceUrl:
-      defaultZone: http://localhost:8762/eureka/,http://localhost:8761/eureka/
+      defaultZone: http://${eurekasrv2}:8762/eureka/,http://${eurekasrv1}:8761/eureka/
 
 ---
 
@@ -223,7 +221,7 @@ spring:
     discovery:
       enabled: false
   zipkin:
-    baseUrl: http://${remotesrv}:9411/
+    baseUrl: http://localhost:9411/
     sender:
       type: web
   sleuth:
@@ -291,7 +289,8 @@ info:
     name: Paolo
     surname: Acquaviva
     contact: paoloacqua@hotmail.it
-  env: dev-zona1
+  env: dev
+  profile: test
   
 # ==============================================================
 # = EUREKA  

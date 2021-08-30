@@ -10,6 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
 
@@ -32,6 +33,7 @@ import com.faraday.webapp.repository.AssociationRepository;
 @SpringBootTest
 @ActiveProfiles({"test"})
 @ContextConfiguration(classes = Application.class)
+@TestPropertySource(properties = {"MySqlIp = 127.0.0.1"}) 
 public class AssociationsControllerTests {
 
   @Autowired

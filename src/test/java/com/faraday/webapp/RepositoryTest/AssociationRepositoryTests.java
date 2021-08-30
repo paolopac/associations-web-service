@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestPropertySource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -24,6 +25,7 @@ import com.faraday.webapp.repository.AssociationRepository;
 @SpringBootTest
 @ActiveProfiles({"test"})
 @TestMethodOrder(OrderAnnotation.class)
+@TestPropertySource(properties = {"MySqlIp = 127.0.0.1"}) 
 public class AssociationRepositoryTests {
 
   @Autowired
