@@ -1,0 +1,9 @@
+0.0.2-snapshot
+
+L’app soddisfa il requirment.
+Tutti i test hanno esito positivo.
+I test presentano stub che, intercettano chiamate realizzate tramite feign.
+L’app risponde efficacemente a chiamate relizzate tramite postman.
+Contatta quindi, microservizi secondari.
+
+JAR OK.

@@ -14,7 +14,7 @@ public class Application {
 
 	public static void main(String[] args) {
     ConfigurableEnvironment environment = new StandardEnvironment();
-    environment.setActiveProfiles("zona1");
+    environment.setActiveProfiles("dev");
 
     SpringApplication application = new SpringApplication(Application.class);
     application.setEnvironment(environment);
