@@ -33,7 +33,6 @@ import com.faraday.webapp.repository.AssociationRepository;
 @SpringBootTest
 @ActiveProfiles({"test"})
 @ContextConfiguration(classes = Application.class)
-@TestPropertySource(properties = {"MySqlIp = 127.0.0.1"}) 
 public class AssociationsControllerTests {
 
   @Autowired

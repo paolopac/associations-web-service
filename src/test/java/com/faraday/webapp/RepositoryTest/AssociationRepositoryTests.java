@@ -25,7 +25,6 @@ import com.faraday.webapp.repository.AssociationRepository;
 @SpringBootTest
 @ActiveProfiles({"test"})
 @TestMethodOrder(OrderAnnotation.class)
-@TestPropertySource(properties = {"MySqlIp = 127.0.0.1"}) 
 public class AssociationRepositoryTests {
 
   @Autowired
