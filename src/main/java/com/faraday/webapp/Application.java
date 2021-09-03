@@ -13,12 +13,7 @@ import org.springframework.core.env.StandardEnvironment;
 public class Application {
 
 	public static void main(String[] args) {
-    ConfigurableEnvironment environment = new StandardEnvironment();
-    environment.setActiveProfiles("dev");
-
-    SpringApplication application = new SpringApplication(Application.class);
-    application.setEnvironment(environment);
-    application.run(args);
+    SpringApplication.run(Application.class, args);
 	}
 
 }

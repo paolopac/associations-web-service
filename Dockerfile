@@ -32,7 +32,7 @@ ENTRYPOINT exec java $JAVA_OPTS $Xmx -XX:+UseSerialGC $Xss -jar associations-web
 
 # docker login 
 
-# docker tag a6effd5c415e paoloacqua/associations-web-service
+# docker tag 5d1477ed1762 paoloacqua/associations-web-service
 
 # docker push paoloacqua/associations-web-service
 

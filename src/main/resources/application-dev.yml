@@ -8,7 +8,7 @@
 # mvn -Dmaven.test.skip=true clean install
 
 # run java JAR with specific profile ID:
-# java -jar -Dspring.profiles.active=zone[n] -DZipkinSrv=127.0.0.1 -DMySqlIp=127.0.0.1 -Deurekasrv1=127.0.0.1 -Deurekasrv2=127.0.0.1 -Xmx96m -Xss512k NameApp.jar
+# java -jar -Dspring.profiles.active=zone[n] -DZipkinSrv=127.0.0.1 -DMySqlIp=127.0.0.1 -Deurekasrv=127.0.0.1 -Xmx96m -Xss512k NameApp.jar
 # ==============================================================
 # = PROFILE: dev
 # ==============================================================
@@ -106,4 +106,4 @@ eureka:
     registerWithEureka: true
     fetch-registry: true
     serviceUrl:
-      defaultZone: http://localhost:8761/eureka/,http://localhost:8762/eureka/
+      defaultZone: http://localhost:8761/eureka/
