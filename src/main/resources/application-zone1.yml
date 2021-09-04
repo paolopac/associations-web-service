@@ -8,7 +8,7 @@
 # mvn -Dmaven.test.skip=true clean install
 
 # run java JAR with specific profile ID:
-# java -jar -Dspring.profiles.active=zone[n] -DZipkinSrv=127.0.0.1 -DMySqlIp=127.0.0.1 -Deurekasrv=127.0.0.1 -Xmx96m -Xss512k NameApp.jar
+# java -jar -Dspring.profiles.active=zone[n] -DZipkinSrv=127.0.0.1 -DMySqlIp=127.0.0.1 -DZuulIp=127.0.0.1 -Xmx96m -Xss512k NameApp.jar
 # ==============================================================
 # = PROFILE: zone1
 # ==============================================================
@@ -16,6 +16,9 @@ spring:
   profiles: zone1
   application:
     name: ASSOCIATIONS-WEB-SERVICE
+  cloud:
+    discovery:
+      enabled: false
   zipkin:
     baseUrl: http://${ZipkinSrv}:9411/
     sender:
@@ -92,18 +95,28 @@ info:
 # ==============================================================
 # = EUREKA  
 # ==============================================================
-eureka:
-  instance:
-    #intervallo di attesa prima della rimozione del servizio (def 90 sec)
-    lease-expiration-duration-in-seconds: 60 
-    #intervallo di invio dell'heartbeat (def 30 sec)
-    leaseRenewalIntervalInSeconds: 10
-    #id di identificazione dell'istanza
-    instanceId: ${spring.application.name}-1
-    #registrazione per indirizzo ip (defualt hostname)
-    preferIpAddress: true
-  client:
-    registerWithEureka: true
-    fetch-registry: true
-    serviceUrl:
-      defaultZone: http://${eurekasrv}:8761/eureka/
+# eureka:
+#   instance:
+#     #intervallo di attesa prima della rimozione del servizio (def 90 sec)
+#     lease-expiration-duration-in-seconds: 60 
+#     #intervallo di invio dell'heartbeat (def 30 sec)
+#     leaseRenewalIntervalInSeconds: 10
+#     #id di identificazione dell'istanza
+#     instanceId: ${spring.application.name}-1
+#     #registrazione per indirizzo ip (defualt hostname)
+#     preferIpAddress: true
+#   client:
+#     registerWithEureka: true
+#     fetch-registry: true
+#     serviceUrl:
+#       defaultZone: http://${eurekasrv}:8761/eureka/
+
+# ==============================================================
+# = RIBBON  
+# ==============================================================
+ribbon:
+  ReadTimeout: 60000
+  ConnectTimeout: 60000
+ZUUL-API-GATEWAY:
+  ribbon:
+    listOfServers: ${ZuulIp}:5093
