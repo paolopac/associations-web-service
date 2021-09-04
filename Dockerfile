@@ -21,7 +21,7 @@ VOLUME ["/logs"]
 RUN apt-get update -y && apt-get install -y locales locales-all
 RUN apt-get update -y && apt upgrade -y && apt install curl -y
 
-COPY /target/ASSOCIATIONS-WEB-SERVICE-0.2.2-SNAPSHOT.jar associations-web-service.jar
+COPY /target/ASSOCIATIONS-WEB-SERVICE-0.3.0-SNAPSHOT.jar associations-web-service.jar
 
 ENTRYPOINT exec java $JAVA_OPTS $Xmx -XX:+UseSerialGC $Xss -jar associations-web-service.jar
 
@@ -32,7 +32,7 @@ ENTRYPOINT exec java $JAVA_OPTS $Xmx -XX:+UseSerialGC $Xss -jar associations-web
 
 # docker login 
 
-# docker tag 5d1477ed1762 paoloacqua/associations-web-service
+# docker tag 71613745e562 paoloacqua/associations-web-service
 
 # docker push paoloacqua/associations-web-service
 
