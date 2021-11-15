@@ -4,30 +4,19 @@
   // Per altre informazioni, visitare: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
   "configurations": [
+  
     {
       "type": "java",
-      "name": "Launch Current File",
-      "request": "launch",
-      "mainClass": "${file}"
-    },
-    {
-      "type": "java",
-      "name": "Launch Application",
+      "name": "Launch Associations",
       "request": "launch",
       "mainClass": "com.faraday.webapp.Application",
-      "projectName": "ASSOCIATIONS-WEB-SERVICE",
+      "projectName": "associations-web-service",
       "vmArgs": [
         "-Dspring.profiles.active=zone1",
         "-DZipkinSrv=127.0.0.1",
         "-DMySqlIp=127.0.0.1",
         "-DZuulIp=127.0.0.1"
       ]
-    },
-    {
-      "type": "java",
-      "name": "Launch SpringBootZuulgatwayproxyStudentServiceApplication",
-      "request": "launch",
-      "mainClass": "com.example.springbootzuulgatwayproxystudentservice.SpringBootZuulgatwayproxyStudentServiceApplication"
     }
   ]
 }

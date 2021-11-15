@@ -85,12 +85,13 @@ management:
 
 # ACTUATOR - INFO
 info:
+  app: @project.version@
+  env: prod
+  profile: zone1
   author:
     name: Paolo
     surname: Acquaviva
     contact: paoloacqua@hotmail.it
-  env: dev
-  profile: zone1 
 
 # ==============================================================
 # = EUREKA  
