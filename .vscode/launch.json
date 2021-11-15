@@ -7,7 +7,7 @@
   
     {
       "type": "java",
-      "name": "Launch Associations",
+      "name": "Launch ASSOCIATIONS",
       "request": "launch",
       "mainClass": "com.faraday.webapp.Application",
       "projectName": "associations-web-service",
