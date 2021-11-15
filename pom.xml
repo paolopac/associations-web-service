@@ -5,7 +5,7 @@
 
   <groupId>com.faraday.webapp</groupId>
   <artifactId>ASSOCIATIONS-WEB-SERVICE</artifactId>
-  <version>0.2.1-SNAPSHOT</version>
+  <version>0.3.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>ASSOCIATIONS-WEB-SERVICE</name>
@@ -97,11 +97,6 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-cache</artifactId>
     </dependency>
-    <!-- Eureka Client -->
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-		</dependency>
 		<!-- TEST JUNIT 5-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

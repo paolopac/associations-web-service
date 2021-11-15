@@ -8,7 +8,7 @@
 # mvn -Dmaven.test.skip=true clean install
 
 # run java JAR with specific profile ID:
-# java -jar -Dspring.profiles.active=zone[n] -DZipkinSrv=127.0.0.1 -DMySqlIp=127.0.0.1 -Deurekasrv1=127.0.0.1 -Deurekasrv2=127.0.0.1 -Xmx96m -Xss512k NameApp.jar
+# java -jar -Dspring.profiles.active=zone[n] -DZipkinSrv=127.0.0.1 -DMySqlIp=127.0.0.1 -Xmx96m -Xss512k NameApp.jar
 
 # ==============================================================
 # = PROFILE: test
@@ -95,13 +95,13 @@ info:
 # ==============================================================
 # = EUREKA  
 # ==============================================================
-eureka:
-  instance:
-    #intervallo di attesa prima della rimozione del servizio (def 90 sec)
-    lease-expiration-duration-in-seconds: 60 
-    #intervallo di invio dell'heartbeat (def 30 sec)
-    leaseRenewalIntervalInSeconds: 10
-    #id di identificazione dell'istanza
-    instanceId: ${spring.application.name}-1
-    #registrazione per indirizzo ip (defualt hostname)
-    preferIpAddress: true
+# eureka:
+#   instance:
+#     #intervallo di attesa prima della rimozione del servizio (def 90 sec)
+#     lease-expiration-duration-in-seconds: 60 
+#     #intervallo di invio dell'heartbeat (def 30 sec)
+#     leaseRenewalIntervalInSeconds: 10
+#     #id di identificazione dell'istanza
+#     instanceId: ${spring.application.name}-1
+#     #registrazione per indirizzo ip (defualt hostname)
+#     preferIpAddress: true
