@@ -13,7 +13,6 @@
       "projectName": "associations-web-service",
       "vmArgs": [
         "-Dspring.profiles.active=zone1",
-        "-DZipkinSrv=127.0.0.1",
         "-DMySqlIp=127.0.0.1",
         "-DZuulIp=127.0.0.1"
       ]

@@ -21,7 +21,7 @@ VOLUME ["/logs"]
 RUN apt-get update -y && apt-get install -y locales locales-all
 RUN apt-get update -y && apt upgrade -y && apt install curl -y
 
-COPY /target/ASSOCIATIONS-WEB-SERVICE-0.3.0-SNAPSHOT.jar associations-web-service.jar
+COPY /target/ASSOCIATIONS-WEB-SERVICE-0.3.1-SNAPSHOT.jar associations-web-service.jar
 
 ENTRYPOINT exec java $JAVA_OPTS $Xmx -XX:+UseSerialGC $Xss -jar associations-web-service.jar
 

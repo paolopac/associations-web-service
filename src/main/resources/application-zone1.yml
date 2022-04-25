@@ -8,7 +8,7 @@
 # mvn -Dmaven.test.skip=true clean install
 
 # run java JAR with specific profile ID:
-# java -jar -Dspring.profiles.active=zone[n] -DZipkinSrv=127.0.0.1 -DMySqlIp=127.0.0.1 -DZuulIp=127.0.0.1 -Xmx96m -Xss512k NameApp.jar
+# java -jar -Dspring.profiles.active=zone[n] -DMySqlIp=127.0.0.1 -DZuulIp=127.0.0.1 -Xmx96m -Xss512k NameApp.jar
 # ==============================================================
 # = PROFILE: zone1
 # ==============================================================
@@ -19,10 +19,6 @@ spring:
   cloud:
     discovery:
       enabled: false
-  zipkin:
-    baseUrl: http://${ZipkinSrv}:9411/
-    sender:
-      type: web
   sleuth:
     sampler:
       probability: 1.0

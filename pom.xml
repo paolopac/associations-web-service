@@ -5,7 +5,7 @@
 
   <groupId>com.faraday.webapp</groupId>
   <artifactId>ASSOCIATIONS-WEB-SERVICE</artifactId>
-  <version>0.3.0-SNAPSHOT</version>
+  <version>0.3.1-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>ASSOCIATIONS-WEB-SERVICE</name>
@@ -76,11 +76,6 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-sleuth</artifactId>
    		</dependency>
-		<!-- ZIPKIN -->
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-zipkin</artifactId>
-   	</dependency>
     <!-- SWAGGER 2 -->
     <dependency>
       <groupId>io.springfox</groupId>
