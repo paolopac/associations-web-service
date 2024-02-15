@@ -27,8 +27,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import java.io.IOException;
 
 import com.faraday.webapp.Application;
-import com.faraday.webapp.entities.Associations;
-import com.faraday.webapp.repository.AssociationRepository;
+import com.faraday.webapp.entities.An003Associtation;
+import com.faraday.webapp.repository.An003Repository;
 
 @SpringBootTest
 @ActiveProfiles({"test"})
@@ -36,7 +36,7 @@ import com.faraday.webapp.repository.AssociationRepository;
 public class ExceptionsControllerTests {
 
   @Autowired
-  private AssociationRepository associationRepository;
+  private An003Repository associationRepository;
   
   private MockMvc mockMvc;
 
@@ -53,7 +53,7 @@ public class ExceptionsControllerTests {
   @Test
   public void testDuplicateExceptionError() throws Exception {
 
-    Associations association = new Associations();
+    An003Associtation association = new An003Associtation();
     association.setNome("ASD RUNNERS");
     association.setFidalId("BA000");
     association.setCF("CQVPLA878UU7YY7U");
@@ -159,7 +159,7 @@ public class ExceptionsControllerTests {
   @Test
   public void  testUpdateDuplicateExceptionError() throws Exception {
 
-    Associations association1 = new Associations();
+    An003Associtation association1 = new An003Associtation();
     association1.setCAP("70022");
     association1.setCitta("altamura");
     association1.setEMail("asdhappyrunners@gmail.com");
@@ -171,7 +171,7 @@ public class ExceptionsControllerTests {
     association1.setTelefono("3333333333");
     associationRepository.save(association1);
 
-    Associations association2 = new Associations();
+    An003Associtation association2 = new An003Associtation();
     association2.setCAP("70022");
     association2.setCitta("altamura");
     association2.setEMail("asdhappyrunners@gmail.com");
@@ -183,7 +183,7 @@ public class ExceptionsControllerTests {
     association2.setTelefono("3333333333");
     associationRepository.save(association2);
 
-    Integer associationId = associationRepository.findByFidalId("B0000").getId();
+    Long associationId = associationRepository.findByFidalId("B0000").getId();
 
     String JsonDataModify = "{\r\n" + 
     "	\"id\": \""+ associationId +"\",\r\n" + 
@@ -216,7 +216,7 @@ public class ExceptionsControllerTests {
   @Test
   public void testUpdateBindingExceptionNomeSizeError() throws Exception {
 
-    Associations association1 = new Associations();
+    An003Associtation association1 = new An003Associtation();
     association1.setCAP("70022");
     association1.setCitta("altamura");
     association1.setEMail("asdhappyrunners@gmail.com");
@@ -228,7 +228,7 @@ public class ExceptionsControllerTests {
     association1.setTelefono("3333333333");
     associationRepository.save(association1);
 
-    Integer associationId = associationRepository.findByFidalId("BA000").getId();
+    Long associationId = associationRepository.findByFidalId("BA000").getId();
 
     String JsonDataErrorBindingNomeSize = "{\r\n" + 
     "	\"id\": \""+ associationId +"\",\r\n" + 
@@ -289,7 +289,7 @@ public class ExceptionsControllerTests {
   @Test
   public void testDeleteAssociations() throws Exception {
 
-    Associations association1 = new Associations();
+    An003Associtation association1 = new An003Associtation();
     association1.setCAP("70022");
     association1.setCitta("altamura");
     association1.setEMail("asdhappyrunners@gmail.com");
@@ -301,7 +301,7 @@ public class ExceptionsControllerTests {
     association1.setTelefono("3333333333");
     associationRepository.save(association1);
 
-    Associations association = associationRepository.findByFidalId("BA000");
+    An003Associtation association = associationRepository.findByFidalId("BA000");
     mockMvc.perform(MockMvcRequestBuilders.delete("/associations/delete/"+association.getId()) 
     .accept(MediaType.APPLICATION_JSON))
     .andExpect(status().isOk())

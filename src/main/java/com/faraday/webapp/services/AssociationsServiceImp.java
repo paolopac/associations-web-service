@@ -7,8 +7,8 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
 import org.springframework.cache.annotation.CacheEvict;
 
-import com.faraday.webapp.entities.Associations;
-import com.faraday.webapp.repository.AssociationRepository;
+import com.faraday.webapp.entities.An003Associtation;
+import com.faraday.webapp.repository.An003Repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class AssociationsServiceImp  implements AssociationsService{
 
   @Autowired
-  private AssociationRepository associationRepository;
+  private An003Repository associationRepository;
 
   @Override
   @Transactional
@@ -35,7 +35,7 @@ public class AssociationsServiceImp  implements AssociationsService{
   //   @CacheEvict(value="allAssociationsCache", allEntries=true),
   //   @CacheEvict(value="selByFIDALIdCache", allEntries=true)
   // })
-  public void insAssociations(Associations association){
+  public void insAssociations(An003Associtation association){
 
     associationRepository.save(association);
 
@@ -44,7 +44,7 @@ public class AssociationsServiceImp  implements AssociationsService{
   @Override
   // VEDI PAOLOAC: NOTA
   // @Cacheable(value = "allAssociationsCache", sync = true)
-  public List<Associations> selAllAssociations(){
+  public List<An003Associtation> selAllAssociations(){
 
     return associationRepository.findAll();
     
@@ -53,7 +53,7 @@ public class AssociationsServiceImp  implements AssociationsService{
   @Override
   // VEDI PAOLOAC: NOTA
   // @Cacheable(value = "selByAssociationsIdCache", key="#id", sync = true)
-  public Associations selByAssociationsId(int id) {
+  public An003Associtation selByAssociationsId(Long id) {
 
     return associationRepository.findById(id).orElse(null);
 
@@ -62,7 +62,7 @@ public class AssociationsServiceImp  implements AssociationsService{
   @Override
   // VEDI PAOLOAC: NOTA
   // @Cacheable(value = "selByFIDALIdCache", sync = true)
-  public Associations selByFIDALId(String FIDALId) {
+  public An003Associtation selByFIDALId(String FIDALId) {
 
     return associationRepository.findByFidalId(FIDALId);
 
@@ -76,7 +76,7 @@ public class AssociationsServiceImp  implements AssociationsService{
   //   @CacheEvict(value="selByAssociationsIdCache", allEntries=true),
   //   @CacheEvict(value="selByFIDALIdCache", allEntries=true)
   // })
-  public Associations updateAssociations(Associations association) {
+  public An003Associtation updateAssociations(An003Associtation association) {
 
     return associationRepository.save(association);
 
@@ -90,14 +90,14 @@ public class AssociationsServiceImp  implements AssociationsService{
   //   @CacheEvict(value="selByAssociationsIdCache", key="#association.id"),
   //   @CacheEvict(value="selByFIDALIdCache", allEntries=true)
   // })
-  public void delAssociations(Associations association) {
+  public void delAssociations(An003Associtation association) {
 
     associationRepository.delete(association);
 
   }
 
   @Override
-  public void detachAssociations(Associations association) {
+  public void detachAssociations(An003Associtation association) {
 
     associationRepository.detach(association);
 

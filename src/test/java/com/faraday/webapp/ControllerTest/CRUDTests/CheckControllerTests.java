@@ -27,8 +27,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.faraday.webapp.Application;
-import com.faraday.webapp.entities.Associations;
-import com.faraday.webapp.repository.AssociationRepository;
+import com.faraday.webapp.entities.An003Associtation;
+import com.faraday.webapp.repository.An003Repository;
 
 @SpringBootTest
 @ActiveProfiles({"test"})

@@ -3,18 +3,18 @@ package com.faraday.webapp.repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import com.faraday.webapp.entities.Associations;
+import com.faraday.webapp.entities.An003Associtation;
 
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class CustomAssociationRepositoryImpl implements CustomAssociationRepository {
+public class CustomAn003RepositoryImpl implements CustomAn003Repository {
 
   @PersistenceContext
   private EntityManager entityManager;
   
   @Override
-  public void detach(Associations association) {
+  public void detach(An003Associtation association) {
 
     entityManager.detach(association);
 

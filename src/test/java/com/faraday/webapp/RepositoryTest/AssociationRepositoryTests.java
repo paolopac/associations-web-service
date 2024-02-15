@@ -18,8 +18,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.faraday.webapp.Application;
-import com.faraday.webapp.entities.Associations;
-import com.faraday.webapp.repository.AssociationRepository;
+import com.faraday.webapp.entities.An003Associtation;
+import com.faraday.webapp.repository.An003Repository;
 
 @ContextConfiguration(classes = Application.class)
 @SpringBootTest
@@ -28,13 +28,13 @@ import com.faraday.webapp.repository.AssociationRepository;
 public class AssociationRepositoryTests {
 
   @Autowired
-  private AssociationRepository associationRepository;
+  private An003Repository associationRepository;
   
   @Test
   @Order(1)
   public void testAssociationsInsert(){
 
-    Associations association = new Associations();
+    An003Associtation association = new An003Associtation();
     association.setCAP("70022");
     association.setCitta("altamura");
     association.setEMail("asdhappyrunners@gmail.com");
@@ -46,15 +46,15 @@ public class AssociationRepositoryTests {
     association.setTelefono("3333333333");
     associationRepository.save(association);
 
-    List<Associations> associations = associationRepository.findAll();
+    List<An003Associtation> associations = associationRepository.findAll();
 
-    List<Associations> associationFinded = associations.stream()
+    List<An003Associtation> associationFinded = associations.stream()
     .filter(ass -> "ASD RUNNERS".equals(ass.getNome()))
     .collect(Collectors.toList());
 
     assertThat(associationRepository.findById(associationFinded.get(0).getId())
     .orElse(null))
-    .extracting(Associations::getNome)
+    .extracting(An003Associtation::getNome)
     .isEqualTo("ASD RUNNERS");
 
   }
@@ -72,15 +72,15 @@ public class AssociationRepositoryTests {
   @Order(3)
   public void testSelByAssociationsId(){
 
-    List<Associations> associations = associationRepository.findAll();
+    List<An003Associtation> associations = associationRepository.findAll();
 
-    List<Associations> associationFinded = associations.stream()
+    List<An003Associtation> associationFinded = associations.stream()
     .filter(ass -> "ASD RUNNERS".equals(ass.getNome()))
     .collect(Collectors.toList());
 
     assertThat(associationRepository.findById(associationFinded.get(0).getId())
     .orElse(null))
-    .extracting(Associations::getNome)
+    .extracting(An003Associtation::getNome)
     .isEqualTo("ASD RUNNERS");
 
   }
@@ -90,7 +90,7 @@ public class AssociationRepositoryTests {
   public void testSelByFIDALId() {
 
     assertThat(associationRepository.findByFidalId("BA000"))
-    .extracting(Associations::getFidalId)
+    .extracting(An003Associtation::getFidalId)
     .isEqualTo("BA000");
       
   }
@@ -99,7 +99,7 @@ public class AssociationRepositoryTests {
   @Order(5)
   public void testUpdateAssociations() {
 
-    Associations association = associationRepository.findByFidalId("BA000");
+    An003Associtation association = associationRepository.findByFidalId("BA000");
 
     association.setNome("ASD RUNNER 2");
     association.setCAP("70033");
@@ -114,16 +114,16 @@ public class AssociationRepositoryTests {
     associationRepository.save(association);
 
     association = associationRepository.findByFidalId("BA___");
-    assertThat(association).extracting(Associations::getNome).isEqualTo("ASD RUNNER 2");
-    assertThat(association).extracting(Associations::getCAP).isEqualTo("70033");
-    assertThat(association).extracting(Associations::getCitta).isEqualTo("altamura in puglia");
-    assertThat(association).extracting(Associations::getCF).isEqualTo("CQVPLA878UU7YY7U");
-    assertThat(association).extracting(Associations::getEMail).isEqualTo("asdhappyrunners22@gmail.com");
-    assertThat(association).extracting(Associations::getFidalId).isEqualTo("BA___");
-    assertThat(association).extracting(Associations::getPIva).isEqualTo("00000000000");
-    assertThat(association).extracting(Associations::getIndirizzo).isEqualTo("Via che non c'è 2");
-    assertThat(association).extracting(Associations::getProvincia).isEqualTo("Milano");
-    assertThat(association).extracting(Associations::getTelefono).isEqualTo("2222222222");
+    assertThat(association).extracting(An003Associtation::getNome).isEqualTo("ASD RUNNER 2");
+    assertThat(association).extracting(An003Associtation::getCAP).isEqualTo("70033");
+    assertThat(association).extracting(An003Associtation::getCitta).isEqualTo("altamura in puglia");
+    assertThat(association).extracting(An003Associtation::getCF).isEqualTo("CQVPLA878UU7YY7U");
+    assertThat(association).extracting(An003Associtation::getEMail).isEqualTo("asdhappyrunners22@gmail.com");
+    assertThat(association).extracting(An003Associtation::getFidalId).isEqualTo("BA___");
+    assertThat(association).extracting(An003Associtation::getPIva).isEqualTo("00000000000");
+    assertThat(association).extracting(An003Associtation::getIndirizzo).isEqualTo("Via che non c'è 2");
+    assertThat(association).extracting(An003Associtation::getProvincia).isEqualTo("Milano");
+    assertThat(association).extracting(An003Associtation::getTelefono).isEqualTo("2222222222");
 
   }
 
@@ -131,7 +131,7 @@ public class AssociationRepositoryTests {
   @Order(6)
   public void testDelAssociations() {
 
-    Associations association = associationRepository.findByFidalId("BA___");
+    An003Associtation association = associationRepository.findByFidalId("BA___");
     associationRepository.delete(association);
     assertNull(associationRepository.findByFidalId("BA___"));
     

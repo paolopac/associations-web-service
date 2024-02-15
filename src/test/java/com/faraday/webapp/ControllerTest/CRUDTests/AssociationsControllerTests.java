@@ -27,8 +27,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.faraday.webapp.Application;
-import com.faraday.webapp.entities.Associations;
-import com.faraday.webapp.repository.AssociationRepository;
+import com.faraday.webapp.entities.An003Associtation;
+import com.faraday.webapp.repository.An003Repository;
 
 @SpringBootTest
 @ActiveProfiles({"test"})
@@ -36,7 +36,7 @@ import com.faraday.webapp.repository.AssociationRepository;
 public class AssociationsControllerTests {
 
   @Autowired
-  private AssociationRepository associationRepository;
+  private An003Repository associationRepository;
   
   private MockMvc mockMvc;
 
@@ -83,7 +83,7 @@ public class AssociationsControllerTests {
   @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
   public void testGetAllAssociations() throws Exception {
 
-    Associations association = new Associations();
+    An003Associtation association = new An003Associtation();
     association.setNome("ASD RUNNERS");
     association.setFidalId("BA000");
     association.setCF("CQVPLA878UU7YY7U");
@@ -110,7 +110,7 @@ public class AssociationsControllerTests {
   @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
   public void testSelByCodAssociations() throws Exception {
 
-    Associations association = new Associations();
+    An003Associtation association = new An003Associtation();
     association.setNome("ASD RUNNERS");
     association.setFidalId("BA000");
     association.setCF("CQVPLA878UU7YY7U");
@@ -123,9 +123,9 @@ public class AssociationsControllerTests {
     association.setEMail("asdhappyrunners@gmail.com");
     associationRepository.save(association);
 
-    List<Associations> associations = associationRepository.findAll();
+    List<An003Associtation> associations = associationRepository.findAll();
 
-    List<Associations> associationFinded = associations.stream()
+    List<An003Associtation> associationFinded = associations.stream()
     .filter(ass -> "ASD RUNNERS".equals(ass.getNome()))
     .collect(Collectors.toList());
 
@@ -165,7 +165,7 @@ public class AssociationsControllerTests {
   @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
   public void testSelByFIDALId() throws Exception {
 
-    Associations association = new Associations();
+    An003Associtation association = new An003Associtation();
     association.setNome("ASD RUNNERS");
     association.setFidalId("BA000");
     association.setCF("CQVPLA878UU7YY7U");
@@ -193,7 +193,7 @@ public class AssociationsControllerTests {
   @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
   public void  testUpdateAssociations() throws Exception {
 
-    Associations association = new Associations();
+    An003Associtation association = new An003Associtation();
     association.setNome("ASD RUNNERS");
     association.setFidalId("BA000");
     association.setCF("CQVPLA878UU7YY7U");
@@ -206,7 +206,7 @@ public class AssociationsControllerTests {
     association.setEMail("asdhappyrunners@gmail.com");
     associationRepository.save(association);
 
-    Integer associationId = associationRepository.findByFidalId("BA000").getId();
+    Long associationId = associationRepository.findByFidalId("BA000").getId();
 
     String JsonDataModify = "{\r\n" + 
   "	\"id\": \""+ associationId +"\",\r\n" + 
@@ -239,7 +239,7 @@ public class AssociationsControllerTests {
   @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
   public void testDeleteAssociations() throws Exception {
 
-    Associations association = new Associations();
+    An003Associtation association = new An003Associtation();
     association.setNome("ASD RUNNERS");
     association.setFidalId("BA000");
     association.setCF("CQVPLA878UU7YY7U");
@@ -252,7 +252,7 @@ public class AssociationsControllerTests {
     association.setEMail("asdhappyrunners@gmail.com");
     associationRepository.save(association);
 
-    Associations associationFinded = associationRepository.findByFidalId("BA000");
+    An003Associtation associationFinded = associationRepository.findByFidalId("BA000");
 
     mockMvc.perform(MockMvcRequestBuilders.delete("/associations/delete/"+associationFinded.getId()) 
     .accept(MediaType.APPLICATION_JSON))
@@ -267,7 +267,7 @@ public class AssociationsControllerTests {
   @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
   public void verifyAssociationById() throws Exception {
 
-    Associations association = new Associations();
+    An003Associtation association = new An003Associtation();
     association.setNome("ASD RUNNERS");
     association.setFidalId("BA000");
     association.setCF("CQVPLA878UU7YY7U");
@@ -280,7 +280,7 @@ public class AssociationsControllerTests {
     association.setEMail("asdhappyrunners@gmail.com");
     associationRepository.save(association);
 
-    int associationId = associationRepository.findByFidalId("BA000").getId();
+    Long associationId = associationRepository.findByFidalId("BA000").getId();
     mockMvc.perform(MockMvcRequestBuilders.get("/associations/verify/code/"+associationId)
     .accept(MediaType.APPLICATION_JSON))
     .andExpect(status().isOk())

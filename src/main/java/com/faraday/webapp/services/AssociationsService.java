@@ -2,22 +2,22 @@ package com.faraday.webapp.services;
 
 import java.util.List;
 
-import com.faraday.webapp.entities.Associations;
+import com.faraday.webapp.entities.An003Associtation;
 
 public interface AssociationsService {
 
-  public void insAssociations(Associations association);
+  public void insAssociations(An003Associtation association);
   
-  public List<Associations> selAllAssociations();
+  public List<An003Associtation> selAllAssociations();
 
-  public Associations selByAssociationsId(int id);
+  public An003Associtation selByAssociationsId(Long id);
 
-  public Associations selByFIDALId(String FIDALId);
+  public An003Associtation selByFIDALId(String FIDALId);
 
-  public Associations updateAssociations(Associations association);
+  public An003Associtation updateAssociations(An003Associtation association);
 
-  public void delAssociations(Associations association);
+  public void delAssociations(An003Associtation association);
   
-  public void detachAssociations(Associations association);
+  public void detachAssociations(An003Associtation association);
 
 }

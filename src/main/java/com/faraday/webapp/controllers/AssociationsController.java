@@ -6,7 +6,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import com.faraday.webapp.entities.Associations;
+import com.faraday.webapp.entities.An003Associtation;
 import com.faraday.webapp.exception.BindingException;
 import com.faraday.webapp.exception.NotFoundException;
 import com.faraday.webapp.exception.DuplicateException;
@@ -51,7 +51,7 @@ public class AssociationsController {
   @ApiOperation(
     value= "Inserisce una nuova associazione sportiva",
     notes= "",
-    response = Associations.class,
+    response = An003Associtation.class,
     produces = "application/json")
   @ApiResponses(value = {
     @ApiResponse(code = 200, message = "Associazione Inserita"),
@@ -59,7 +59,7 @@ public class AssociationsController {
     @ApiResponse(code = 406, message = "Associazione con FIDAL Id presente")
   })
   @RequestMapping(value = "/create", method = RequestMethod.POST, produces = "application/json")
-  public ResponseEntity<?> insAssociations(@ApiParam("Associations da inserire") @Valid @RequestBody Associations association, BindingResult bindingResult) 
+  public ResponseEntity<?> insAssociations(@ApiParam("Associations da inserire") @Valid @RequestBody An003Associtation association, BindingResult bindingResult) 
   throws BindingException, DuplicateException {
     
     log.info(String.format("********** Save associations %s", association.getNome()));
@@ -103,18 +103,18 @@ public class AssociationsController {
     value= "Reperimento lista associazioni",
     notes= "Recupera tutte le associazioni",
     responseContainer = "List",
-    response = Associations.class,
+    response = An003Associtation.class,
     produces = "application/json")
   @ApiResponses(value = {
     @ApiResponse(code = 200, message = "Associazioni trovate"),
     @ApiResponse(code = 404, message = "Associazioni non presenti"),
   })
   @RequestMapping(value="/search/all", method = RequestMethod.GET, produces = "application/json")
-  public ResponseEntity<List<Associations>> selAllAssociations() throws NotFoundException {
+  public ResponseEntity<List<An003Associtation>> selAllAssociations() throws NotFoundException {
 
     log.info("********** Get all associations");
 
-    List<Associations> associations = associationsService.selAllAssociations();
+    List<An003Associtation> associations = associationsService.selAllAssociations();
 
     if(associations.isEmpty()){
 
@@ -127,25 +127,25 @@ public class AssociationsController {
     
     log.info("********** Associations found:" + associations.size());
 
-    return new ResponseEntity<List<Associations>>(associations, HttpStatus.OK);
+    return new ResponseEntity<List<An003Associtation>>(associations, HttpStatus.OK);
     
   }
   
   @ApiOperation(
     value= "Reperimento associazione attraverso Id",
     notes= "Recupera l'associazione attraverso l'id associazine",
-    response = Associations.class,
+    response = An003Associtation.class,
     produces = "application/json")
   @ApiResponses(value = {
     @ApiResponse(code = 200, message = "Associazione trovata"),
     @ApiResponse(code = 404, message = "Associazione non presente"),
   })
   @RequestMapping(value="/search/code/{id}", method = RequestMethod.GET, produces = "application/json")
-  public ResponseEntity<Associations> selByAssociationsId(@ApiParam("Id associazione da ricercare") @PathVariable("id") int id) throws NotFoundException {
+  public ResponseEntity<An003Associtation> selByAssociationsId(@ApiParam("Id associazione da ricercare") @PathVariable("id") Long id) throws NotFoundException {
     
     log.info("********** Get associations with id: " + id);
 
-    Associations association = associationsService.selByAssociationsId(id);
+    An003Associtation association = associationsService.selByAssociationsId(id);
 
     if(null == association) {
 
@@ -154,7 +154,7 @@ public class AssociationsController {
       throw new NotFoundException(errMsg);
     }
 
-    return new ResponseEntity<Associations>(association, HttpStatus.OK);
+    return new ResponseEntity<An003Associtation>(association, HttpStatus.OK);
 
   }
   
@@ -162,18 +162,18 @@ public class AssociationsController {
   @ApiOperation(
     value= "Reperimento associazione attraverso FIDAL Id",
     notes= "Recupera l'associazione attraverso il FIDAL Id",
-    response = Associations.class,
+    response = An003Associtation.class,
     produces = "application/json")
   @ApiResponses(value = {
     @ApiResponse(code = 200, message = "Associazione trovata"),
     @ApiResponse(code = 404, message = "Associazione non presente"),
   }) 
   @RequestMapping(value="/search/fidalid/{id}", method = RequestMethod.GET, produces = "application/json")
-  public ResponseEntity<Associations> selByFIDALId(@ApiParam("FIDAL Id") @PathVariable("id") String id) throws NotFoundException{
+  public ResponseEntity<An003Associtation> selByFIDALId(@ApiParam("FIDAL Id") @PathVariable("id") String id) throws NotFoundException{
 
     log.info("********** Get associations with FIDAL id: " + id);
 
-    Associations association = associationsService.selByFIDALId(id);
+    An003Associtation association = associationsService.selByFIDALId(id);
 
     if(null == association) {
 
@@ -183,14 +183,14 @@ public class AssociationsController {
 
     }
 
-    return new ResponseEntity<Associations>(association, HttpStatus.OK);
+    return new ResponseEntity<An003Associtation>(association, HttpStatus.OK);
 
   }
 
   @ApiOperation(
     value= "Modifica associazione",
     notes= "",
-    response = Associations.class,
+    response = An003Associtation.class,
     produces = "application/json")
   @ApiResponses(value = {
     @ApiResponse(code = 200, message = "Associazione modificata"),
@@ -199,7 +199,7 @@ public class AssociationsController {
     @ApiResponse(code = 406, message = "Associazione con FIDAL Id presente")
   }) 
   @RequestMapping(value="/update", method = RequestMethod.PUT, produces ="application/json")
-  public ResponseEntity<?> updateAssociations(@ApiParam("Associazione contenente proprietà aggiornate") @Valid @RequestBody Associations association, BindingResult bindingResult) throws BindingException, NotFoundException, DuplicateException {
+  public ResponseEntity<?> updateAssociations(@ApiParam("Associazione contenente proprietà aggiornate") @Valid @RequestBody An003Associtation association, BindingResult bindingResult) throws BindingException, NotFoundException, DuplicateException {
     
     log.info(String.format("********** Modify associations %s", association.getNome()));
 
@@ -213,7 +213,7 @@ public class AssociationsController {
 
     }
 
-    Associations associationOld = new Associations();
+    An003Associtation associationOld = new An003Associtation();
 
     associationOld =  associationsService.selByAssociationsId(association.getId());
 
@@ -229,7 +229,7 @@ public class AssociationsController {
     
     if(!association.getFidalId().equals(associationOld.getFidalId())) {
 
-      Associations associationFinded = associationsService.selByFIDALId(association.getFidalId());
+      An003Associtation associationFinded = associationsService.selByFIDALId(association.getFidalId());
 
       if(null != associationFinded) {
         
@@ -262,18 +262,18 @@ public class AssociationsController {
   @ApiOperation(
     value= "Eliminazione associazione",
     notes= "",
-    response = Associations.class,
+    response = An003Associtation.class,
     produces = "application/json")
   @ApiResponses(value = {
     @ApiResponse(code = 200, message = "Associazione eliminata"),
     @ApiResponse(code = 404, message = "Associazione non presente")
   }) 
   @RequestMapping(value="/delete/{id}", method = RequestMethod.DELETE)
-  public ResponseEntity<?> delAssociations(@ApiParam("Id associazione") @PathVariable("id") int id) throws NotFoundException {
+  public ResponseEntity<?> delAssociations(@ApiParam("Id associazione") @PathVariable("id") Long id) throws NotFoundException {
 
     log.info(String.format("********** Delete associations %s", id));
 
-    Associations association = associationsService.selByAssociationsId(id);
+    An003Associtation association = associationsService.selByAssociationsId(id);
 
     if(null == association) {
 
@@ -306,11 +306,11 @@ public class AssociationsController {
     @ApiResponse(code = 404, message = "Associazione non presente"),
   })
   @RequestMapping(value="/verify/code/{id}", method = RequestMethod.GET, produces = "application/json")
-  public ResponseEntity<Void> verifyAssociationsById(@ApiParam("Id associazione di cui è necessario verificarne l'esistenza") @PathVariable("id") int id) throws NotFoundException {
+  public ResponseEntity<Void> verifyAssociationsById(@ApiParam("Id associazione di cui è necessario verificarne l'esistenza") @PathVariable("id") Long id) throws NotFoundException {
     
     log.info(String.format(messager.getMessage("Ok.Associations.Pre.selAssociationsById", null, LocaleContextHolder.getLocale()), id));
 
-    Associations association = associationsService.selByAssociationsId(id);
+    An003Associtation association = associationsService.selByAssociationsId(id);
 
     if(null == association) {
 
