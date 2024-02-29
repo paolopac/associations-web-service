@@ -76,10 +76,13 @@ management:
   endpoints:
     web:
       exposure: 
-        include: health, info, shutdown
+        include: health, info, shutdown, metrics, mappings
     # ACTUATOR - SHUTDOWN
     shutdown:
       enabled: true
+  endpoint:
+     health:
+      show-details: always
 
 # ACTUATOR - INFO
 info:
