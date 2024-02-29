@@ -121,4 +121,4 @@ ribbon:
   ConnectTimeout: 60000
 ZUUL-API-GATEWAY:
   ribbon:
-    listOfServers: http://${ZuulIp}:8755
+    listOfServers: http://${ZuulIp}:8120
