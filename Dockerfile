@@ -21,18 +21,18 @@ VOLUME ["/logs"]
 RUN apt-get update -y && apt-get install -y locales locales-all
 RUN apt-get update -y && apt upgrade -y && apt install curl -y
 
-COPY /target/ASSOCIATIONS-WEB-SERVICE-0.3.1-SNAPSHOT.jar micro-service-associations.jar
+COPY /target/ASSOCIATIONS-WEB-SERVICE-0.3.1-SNAPSHOT.jar th-prj-ms-associations.jar
 
-ENTRYPOINT exec java $JAVA_OPTS $Xmx -XX:+UseSerialGC $Xss -jar micro-service-associations.jar
+ENTRYPOINT exec java $JAVA_OPTS $Xmx -XX:+UseSerialGC $Xss -jar th-prj-ms-associations.jar
 
 #Generazione Immagine:
-# docker build -t micro-service-associations .
+# docker build -t th-prj-ms-associations .
 
 # Upload in dockerhub:
 
 # docker login 
 
-# docker tag d70f60cebe96a6583d4077769bce238dd7b435485a7eb81eae114f8e1c96ea53 paoloacqua/micro-service-associations
+# docker tag 40cf27f3490e3803161045e2b4dbcd0bd59d7b81f76d2e11b4e3f74a727aa251 paoloacqua/th-prj-ms-associations
 
-# docker push paoloacqua/micro-service-associations
+# docker push paoloacqua/th-prj-ms-associations
 
