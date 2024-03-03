@@ -1,5 +1,5 @@
 # ==============================================================
-# ==== Docker File Creazione Immagine Eureka-Web-Service =====
+# ==== Docker File Creazione Immagine Associations-Micro-Service =====
 # ==============================================================
 FROM openjdk:11-jre-slim
 
@@ -21,18 +21,18 @@ VOLUME ["/logs"]
 RUN apt-get update -y && apt-get install -y locales locales-all
 RUN apt-get update -y && apt upgrade -y && apt install curl -y
 
-COPY /target/ASSOCIATIONS-WEB-SERVICE-0.3.1-SNAPSHOT.jar associations-web-service.jar
+COPY /target/ASSOCIATIONS-WEB-SERVICE-0.3.1-SNAPSHOT.jar micro-service-associations.jar
 
-ENTRYPOINT exec java $JAVA_OPTS $Xmx -XX:+UseSerialGC $Xss -jar associations-web-service.jar
+ENTRYPOINT exec java $JAVA_OPTS $Xmx -XX:+UseSerialGC $Xss -jar micro-service-associations.jar
 
 #Generazione Immagine:
-# docker build -t associations-web-service .
+# docker build -t micro-service-associations .
 
 # Upload in dockerhub:
 
 # docker login 
 
-# docker tag 6df6bdbeab1a paoloacqua/associations-web-service
+# docker tag d70f60cebe96a6583d4077769bce238dd7b435485a7eb81eae114f8e1c96ea53 paoloacqua/micro-service-associations
 
-# docker push paoloacqua/associations-web-service
+# docker push paoloacqua/micro-service-associations
 
