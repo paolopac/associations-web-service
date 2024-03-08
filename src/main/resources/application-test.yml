@@ -5,7 +5,7 @@
 # = NOTE
 # ==============================================================   
 # build:
-# mvn -Dmaven.test.skip=true clean install
+# mvn -D maven.test.skip=true clean install
 
 # run java JAR with specific profile ID:
 # java -jar -Dspring.profiles.active=zone[n] -DMySqlIp=127.0.0.1 -Xmx96m -Xss512k NameApp.jar
@@ -29,9 +29,9 @@ spring:
 # ==============================================================
   datasource:
     initialization-mode: always
-    username: tarahumaraWS
-    password: 20210821Ta!
-    url: jdbc:mysql://localhost:13306/tarahumara?useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    username: microService
+    password: 20240307Tp!
+    url: jdbc:mysql://localhost:3306/tarahumara?useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
     hikari:
       connection-timeout: 40000
       max-lifetime: 40000
